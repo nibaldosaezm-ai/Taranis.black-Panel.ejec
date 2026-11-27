@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taranis Black · Panel Ejecutivo</title>
+<style>
+:root{--bg:#f3f5f7;--card:#fff;--ink:#14212b;--mut:#5d6b77;--line:#dde3e8;--bud:#a9b4be;--real:#0f5c70;--bad:#c4452d;--ia:#2e8b57;--sel:#14212b;--selt:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f161c;--card:#18222b;--ink:#e8eef2;--mut:#93a2ae;--line:#2a3742;--bud:#5f6f7c;--real:#4db6cf;--bad:#f0735a;--ia:#5fc58a;--sel:#e8eef2;--selt:#0f161c}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:none;margin:0 auto;padding:24px clamp(16px,3vw,48px) 40px}
+h1{font-size:clamp(24px,4vw,34px);margin:0;letter-spacing:-.02em}
+.sub{color:var(--mut);margin:4px 0 20px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.kpi small{color:var(--mut);display:block}
+.kpi b{display:block;font-size:28px;letter-spacing:-.02em;margin:2px 0}
+.kpi span{color:var(--mut);font-size:13px}
+.kpi.bad{border-left:4px solid var(--bad)}.kpi.ia{border-left:4px solid var(--ia)}.kpi.ok{border-left:4px solid var(--real)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--sel);color:var(--selt);border-color:var(--sel)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--real);outline-offset:2px}
+.panel{display:none}.panel.on{display:block}
+.grid{display:grid;gap:14px}
+h2{font-size:17px;margin:0 0 2px}
+.card p{margin:0 0 10px;color:var(--mut);font-size:13px}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--mut);font-size:12px;font-family:inherit}
+svg .v{fill:var(--ink);font-weight:600}
+.leg{display:flex;gap:14px;font-size:13px;color:var(--mut);margin-top:6px;flex-wrap:wrap}
+.leg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.ctl{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+label{display:flex;justify-content:space-between;font-weight:600;margin-bottom:6px}
+input[type=range]{width:100%;accent-color:var(--real)}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}
+.res div{border:1px solid var(--line);border-radius:10px;padding:12px}
+.res small{color:var(--mut);display:block}.res b{font-size:22px}
+.note{color:var(--mut);font-size:13px;margin-top:20px}
+.sc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.sc .card{border-top:4px solid var(--bud)}.sc .card.s3{border-top-color:var(--ia)}.sc .card.s1{border-top-color:var(--bad)}.sc .card.s2{border-top-color:var(--real)}.sc dl{margin:8px 0 0}.sc dt{color:var(--mut);font-size:13px}.sc dd{margin:0 0 8px;font-size:20px;font-weight:700}.warn{border-left:4px solid var(--bad);background:var(--card);border-radius:12px;border:1px solid var(--line);border-left-width:4px;padding:14px 16px;color:var(--ink);font-size:14px}.meto ul{margin:6px 0 0;padding-left:20px;color:var(--mut);font-size:13px}.meto li{margin-bottom:4px}.tt{position:fixed;pointer-events:none;background:var(--sel);color:var(--selt);padding:6px 9px;border-radius:6px;font-size:12px;display:none;z-index:5}
+.tb{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0 10px}.tb th,.tb td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}.tb th:first-child,.tb td:first-child{text-align:left}.tb th{color:var(--mut);font-weight:600;font-size:13px}.tb tr.hl td{font-weight:700}.tb tr.bd td{font-weight:700;color:var(--bad)}.tb td:last-child.l,.tb th.l,.tb td.l{text-align:left}.hyp{color:var(--mut);font-size:13px;margin:4px 0 0}
+@media (min-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid>.warn,.grid>.sc,.grid>.meto,#p3 .grid>.card:nth-child(-n+2),#p2 .grid>.card:last-child{grid-column:1/-1}}
+.card{min-width:0;overflow-x:auto}
+</style>
+</head>
+<body>
+<main>
+<h1>Taranis Black · Panel Ejecutivo</h1>
+<p class="sub">Presupuesto vs Real 2026 y proyección T1 2027 · Cifras en USD</p>
+
+<section class="kpis">
+<div class="card kpi ok"><small>Ingresos brutos reales</small><b>USD 48,5M</b><span>Presupuesto 48,6M (-0,2%)</span></div>
+<div class="card kpi bad"><small>EBITDA real</small><b>USD 5,77M</b><span>-41,4% vs presupuesto · margen 11,9%</span></div>
+<div class="card kpi bad"><small>Brecha EBITDA</small><b>USD 4,08M</b><span>Presupuesto 9.848 vs real 5.770 (miles)</span></div>
+<div class="card kpi bad"><small>Lucro líquido real</small><b>USD 3,11M</b><span>-47,9% vs presupuesto 5,97M · gastos financieros +30,9%</span></div>
+<div class="card kpi ia"><small>Meta de mejora EBITDA T1 2027</small><b id="kMej">–</b><span>Meta de recuperación (simulador)</span></div>
+</section>
+
+<div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-t="p1">Auditoría trimestral</button>
+<button role="tab" aria-selected="false" data-t="p2">Fricciones y brecha</button>
+<button role="tab" aria-selected="false" data-t="p3">Simulador T1 2027</button>
+<button role="tab" aria-selected="false" data-t="p4">Pronóstico T1 2027</button>
+</div>
+
+<div class="panel on" id="p1"><div class="grid">
+<div class="card"><h2>Ingresos brutos por trimestre</h2><p>USD miles · presupuesto vs real</p><svg id="c1" viewBox="0 0 640 280" role="img" aria-label="Barras de ingresos presupuestado vs real por trimestre"></svg><div class="leg"><span><i style="background:var(--bud)"></i>Presupuesto</span><span><i style="background:var(--real)"></i>Real</span></div></div>
+<div class="card"><h2>EBITDA por trimestre</h2><p>USD miles · presupuesto total 9.848, real total 5.770</p><svg id="c2" viewBox="0 0 640 280" role="img" aria-label="Barras de EBITDA presupuestado vs real por trimestre"></svg><div class="leg"><span><i style="background:var(--bud)"></i>Presupuesto</span><span><i style="background:var(--real)"></i>Real</span></div></div>
+<div class="card"><h2>Margen EBITDA</h2><p>% sobre ingresos brutos</p><svg id="c3" viewBox="0 0 640 280" role="img" aria-label="Líneas de margen EBITDA presupuestado vs real"></svg><div class="leg"><span><i style="background:var(--bud)"></i>Presupuesto</span><span><i style="background:var(--real)"></i>Real</span></div></div>
+<div class="card"><h2>Lucro líquido por trimestre</h2><p>USD miles · presupuesto total 5.965, real total 3.109 (-47,9%) · gastos financieros 1.060 vs 810 (+30,9%)</p><svg id="c10" viewBox="0 0 640 280" role="img" aria-label="Barras de lucro líquido presupuestado vs real por trimestre"></svg><div class="leg"><span><i style="background:var(--bud)"></i>Presupuesto</span><span><i style="background:var(--real)"></i>Real</span></div></div>
+<div class="card"><h2>Ingresos por canal vs presupuesto</h2><p>USD miles · variación real vs presupuesto por trimestre</p>
+<table class="tb"><tr><th>Canal</th><th>T1</th><th>T2</th><th>T3</th><th>T4</th><th>Año</th></tr>
+<tr><td>B2B real</td><td>7.750</td><td>8.200</td><td>8.600</td><td>9.050</td><td>33.600</td></tr>
+<tr class="hl"><td>B2B vs presupuesto</td><td>+3,3%</td><td>+2,5%</td><td>-3,4%</td><td>-5,7%</td><td>-1,2%</td></tr>
+<tr><td>D2C real</td><td>3.100</td><td>3.550</td><td>3.900</td><td>4.350</td><td>14.900</td></tr>
+<tr class="hl"><td>D2C vs presupuesto</td><td>-3,1%</td><td>+4,4%</td><td>+2,6%</td><td>+3,6%</td><td>+2,1%</td></tr>
+<tr><td>Total vs presupuesto</td><td>+1,4%</td><td>+3,1%</td><td>-1,6%</td><td>-2,9%</td><td>-0,2%</td></tr></table>
+<p class="hyp">El total anual (-0,2%) enmascara una reversión en el segundo semestre: B2B pasa de superar el presupuesto a quedar por debajo (-550 en T4), mientras D2C se mantiene sobre presupuesto. D2C pesa 32,5% de los ingresos del T4 frente a 30,4% presupuestado.</p></div>
+<div class="card"><h2>Conciliación de ingresos: Estado de Resultados vs. hoja por producto</h2><p>USD miles · diferencias sin conciliar tanto en presupuesto (600) como en real (1.100)</p>
+<table class="tb"><tr><th></th><th>Presupuesto</th><th>Real</th><th>Variación</th></tr>
+<tr><td>Estado de Resultados (ingresos brutos)</td><td>48.600</td><td>48.500</td><td>-100 (-0,2%)</td></tr>
+<tr><td>Hoja de ingresos por producto</td><td>48.000</td><td>47.400</td><td>-600 (-1,25%)</td></tr>
+<tr class="bd"><td>Diferencia sin conciliar</td><td>600</td><td>1.100</td><td>+500 (+83%)</td></tr></table>
+<p class="hyp"><b>Descartado:</b> la PDD (real 1.110: quedan 10 sin explicar; en presupuesto la PDD es 440, no 600) y las cancelaciones y descartes (560 / 1.235). Ninguna combinación de líneas del Estado de Resultados explica a la vez 600 en presupuesto y 1.100 en real. <b>Por verificar en el ERP:</b> ingresos no asignados a una línea de producto (p. ej. servicios de montaje o fletes facturados), diferencias de criterio o de corte entre ambas fuentes, y el detalle trimestral por producto.</p></div>
+</div></div>
+
+<div class="panel" id="p2"><div class="grid">
+<div class="card"><h2>Causas de la brecha EBITDA</h2><p>USD miles · brecha anual 4.078 (-41,4%)</p><svg id="c4" viewBox="0 0 640 260" role="img" aria-label="Cinco causas de la brecha en barras horizontales"></svg></div>
+<div class="card"><h2>Composición de la brecha</h2><p>Las 5 causas suman 3.480 (85,3%); el resto es 598 (14,7%)</p><svg id="c5" viewBox="0 0 640 130" role="img" aria-label="Barra apilada con la composición de la brecha"></svg><div class="leg" id="l5"></div></div>
+<div class="card"><h2>Qué contiene el «Resto» (598)</h2><p>USD miles · diferencia anual real vs presupuesto fuera de las 5 causas</p>
+<table class="tb"><tr><th>Partida</th><th>Monto</th><th class="l">Detalle</th></tr>
+<tr><td>Costo de ventas</td><td>510</td><td class="l">materia prima +400, mano de obra +110</td></tr>
+<tr><td>Menor ingreso bruto neto de impuestos</td><td>83</td><td class="l">ingresos -100, menores impuestos +17</td></tr>
+<tr><td>Comisiones y ventas</td><td>5</td><td class="l">+5 sobre presupuesto</td></tr>
+<tr class="hl"><td>Total resto</td><td>598</td><td class="l">14,7% de la brecha</td></tr></table></div>
+<div class="card"><h2>Partidas fuera del EBITDA y concentración en el tiempo</h2><p>USD miles · presupuesto vs real anual</p>
+<table class="tb"><tr><th>Concepto</th><th>Presupuesto</th><th>Real</th><th>Variación</th></tr>
+<tr><td>Lucro bruto operacional</td><td>19.698</td><td>18.430</td><td>-6,4%</td></tr>
+<tr><td>Margen bruto s/ ingresos brutos</td><td>40,5%</td><td>38,0%</td><td>-2,5 p.p.</td></tr>
+<tr><td>Cancelaciones y descartes</td><td>560</td><td>1.235</td><td>+120,5%</td></tr>
+<tr><td>Gastos financieros</td><td>810</td><td>1.060</td><td>+30,9%</td></tr>
+<tr class="hl"><td>Lucro líquido</td><td>5.965</td><td>3.109</td><td>-47,9%</td></tr></table>
+<p class="hyp">Brecha de EBITDA por trimestre: 330,5 / 414,5 / 1.446 / 1.887. T3 y T4 concentran 3.333 de 4.078 (81,7%). En el T4 las 5 causas excedieron el presupuesto en 1.375 (72,9% de la brecha del trimestre); anualizado serían 5.500 frente a los 3.480 acumulados del año.</p></div>
+<div class="card"><h2>Otras anomalías detectadas</h2><p>Cálculos sobre el Estado de Resultados · USD miles</p>
+<table class="tb"><tr><th>Anomalía</th><th class="l">Evidencia</th><th class="l">Lectura</th></tr>
+<tr><td>Quiebre en T3</td><td class="l">EBITDA -37,0% vs T2 (1.832,5 → 1.155) con ingresos +6,4%</td><td class="l">En un trimestre: cancelaciones +58%, PDD +55%, reentregas +45%, fletes +33%</td></tr>
+<tr><td>Costo de ventas sube con ventas netas a la baja</td><td class="l">CMV +510 (+2,5%) con ingresos netos -758 (-1,9%); CMV / ingresos netos en T4: 54,5% vs 50,0%</td><td class="l">Hipótesis por verificar: descartes de pedidos ya producidos o alza de insumos</td></tr>
+<tr><td>PDD sobre ingresos B2B</td><td class="l">T4: 4,31% vs 1,30% presupuestado</td><td class="l">Anual 3,30%; el 3,4% del Excel operativo no tiene base confirmada</td></tr>
+<tr><td>Gastos financieros y cobertura</td><td class="l">210 → 320 en el año; EBITDA ÷ gastos financieros: 8,5x (T1) → 3,1x (T4) vs 12,6x presupuestado</td><td class="l">Menor holgura para absorber más deterioro</td></tr>
+<tr><td>Gasto discrecional en presupuesto</td><td class="l">Marketing 0,0%; gastos comerciales +0,2%</td><td class="l">El desvío es operativo, no comercial</td></tr>
+<tr><td>Calidad de datos</td><td class="l">El Estado de Resultados no informa depreciación; los signos de variación son mixtos (costos en exceso negativos, menos impuestos positivo)</td><td class="l">El lucro líquido podría estar sobrestimado</td></tr></table></div>
+</div></div>
+
+<div class="panel" id="p3"><div class="grid">
+<div class="card"><h2>Supuestos y meta</h2><p>Ingresos T1 2027 = 13.400 (plano al T4) · margen inercial 7,5% · EBITDA inercial ≈ 1.002 · gastos financieros 320 (= T4) · impuesto 34% de (EBITDA - gastos financieros) · base anual de fricciones 2.780 (USD miles). El 40% es la meta de recuperación que persiguen las mejoras, no una estimación de ahorro.</p>
+<div class="ctl">
+<div><label for="rec"><span>Meta de recuperación de fricciones</span><span id="recV">40%</span></label><input id="rec" type="range" min="0" max="60" step="1" value="40"></div>
+<div><label for="mes"><span>Meses sin beneficio en el trimestre</span><span id="mesV">0</span></label><input id="mes" type="range" min="0" max="3" step="1" value="0"></div>
+</div>
+<div class="res">
+<div><small>EBITDA inercial</small><b id="rIn">–</b></div>
+<div><small>EBITDA con intervenciones</small><b id="rIA" style="color:var(--ia)">–</b></div>
+<div><small>Mejora de EBITDA</small><b id="rMej">–</b></div>
+<div><small>Mejora de margen</small><b id="rPP">–</b></div>
+<div><small>Lucro líquido inercial</small><b id="rLN0">–</b></div>
+<div><small>Lucro líquido con intervenciones</small><b id="rLN1" style="color:var(--ia)">–</b></div>
+</div></div>
+<div class="card"><h2>Meta de recuperación por causa</h2><p>USD miles · meta del trimestre T1 2027 = base anual × meta ÷ 4, ajustada por los meses sin beneficio. La asignación a líneas del Estado de Resultados es un supuesto.</p>
+<table class="tb"><thead><tr><th>Causa</th><th>Base anual</th><th>Meta T1 2027</th><th class="l">Línea del Estado de Resultados</th></tr></thead><tbody id="tCause"></tbody></table></div>
+<div class="card"><h2>EBITDA T1 2027: inercial vs con intervenciones</h2><p>USD miles</p><svg id="c6" viewBox="0 0 640 260" role="img" aria-label="Barras de EBITDA inercial vs con intervenciones"></svg></div>
+</div></div>
+
+<div class="panel" id="p4"><div class="grid">
+<div class="sc" id="sc"></div>
+<div class="warn" role="note"><b>Advertencia metodológica.</b> La proyección es un ejercicio exploratorio basado en cuatro observaciones trimestrales de 2026: sin estacionalidad, sin intervalos de confianza y sin costos de implementación. El escenario de deterioro extrapola linealmente las razones de costos observadas; el inercial repite el T4; el escenario con intervenciones representa la meta de recuperación (40% de la base de fricciones) que persiguen las mejoras y no un ahorro garantizado.</div>
+<div class="card"><h2>EBITDA T1 2027 por escenario</h2><p>USD miles</p><svg id="c7" viewBox="0 0 640 260" role="img" aria-label="Barras de EBITDA proyectado en los tres escenarios"></svg></div>
+<div class="card"><h2>Margen EBITDA proyectado</h2><p>% sobre ingresos brutos · T4 2026 real: 7,5%</p><svg id="c8" viewBox="0 0 640 170" role="img" aria-label="Comparación de márgenes EBITDA proyectados"></svg></div>
+<div class="card"><h2>Diferencia de EBITDA vs T4 2026 real</h2><p>USD miles · EBITDA real T4 2026 = 1.002</p><svg id="c9" viewBox="0 0 640 200" role="img" aria-label="Diferencia de EBITDA de cada escenario frente al T4 2026"></svg></div>
+<div class="card"><h2>Lucro líquido T1 2027 por escenario</h2><p>USD miles · (EBITDA - gastos financieros) × (1 - 34%) · T4 2026 real: 450,12</p><svg id="c11" viewBox="0 0 640 260" role="img" aria-label="Barras de lucro líquido proyectado en los tres escenarios"></svg></div>
+<div class="card"><h2>Proyección línea a línea T1 2027</h2><p>USD · ingresos brutos T1 2027 = 13.400.000 en los tres escenarios · redondeado al dólar</p><table class="tb" id="tPL"></table></div>
+<div class="card"><h2>Sensibilidad del EBITDA T1 2027</h2><p>USD · ingresos × meta de recuperación de la base de 2.780.000 · cada 1% de ingresos mueve ≈ USD 21.500 de EBITDA (margen de contribución 16,1%; administración y marketing fijos)</p><table class="tb" id="tSens"></table></div>
+<div class="card meto"><h2>Metodología y supuestos</h2><ul>
+<li><b>Estructura:</b> cada escenario proyecta el Estado de Resultados línea a línea a partir del T4 2026 real. Ingresos brutos T1 2027 = USD 13.400.000 en los tres escenarios (no hay estacionalidad conocida: solo existe un año de datos); la sensibilidad a ingresos está en la tabla de sensibilidad. Líneas variables como % de ingresos brutos: impuestos (17,0%), cancelaciones, materia prima, mano de obra, gastos comerciales, fletes, reentregas y PDD. Administración, marketing y gastos financieros como monto fijo.</li>
+<li><b>Inercial:</b> todas las razones y montos del T4 2026 se mantienen (EBITDA 1.002.000; lucro líquido 450.120).</li>
+<li><b>Deterioro:</b> las razones de cancelaciones (3,13% → 3,76%), materia prima (35,45% → 36,15%), fletes (9,10% → 10,17%), reentregas (1,94% → 2,27%) y PDD (2,91% → 3,53%), y los montos de administración (590.000 → 645.000) y gastos financieros (320.000 → 360.000), continúan su tendencia lineal T1–T4 2026 (mínimos cuadrados con x = 1…4; se proyecta x = 5). Mano de obra, gastos comerciales y marketing se mantienen en el T4 (en línea con presupuesto).</li>
+<li><b>Con intervenciones:</b> inercial + meta = 2.780.000 × 40% ÷ 4 = USD 278.000. Asignación por línea (supuesto): cancelaciones y descartes 125.000 (mejora el lucro bruto); fletes 96.000, reentregas y multas 39.000 y administración 18.000 (reducen gastos operativos); PDD y gastos financieros sin cambio. El beneficio se aplica completo al T1 2027; el simulador permite descontar meses sin beneficio.</li>
+<li><b>Base anual USD 2.780.000:</b> pedidos cancelados por lentitud en homologación de crédito 1.250.000; fletes duplicados y entregas de emergencia 960.000; cancelaciones e intereses por divergencias de facturación 390.000; horas extras y auditorías por cierre contable tardío 180.000. La cifra de 1.250.000 se trata como efecto en margen; si correspondiera a ingreso perdido, la meta debe recalcularse. La PDD (exceso de 670.000 en el año; 265.000 en el T4) no forma parte de la base.</li>
+<li><b>Lectura de la meta:</b> los 278.000 cubren el 14,7% de la brecha de EBITDA del T4 (1.887.000). Aplicando el 100% de la base (695.000 por trimestre) se cubriría el 36,8%. Volver al margen presupuestado del T4 (20,93%) con 13.400.000 de ingresos requeriría ≈ 1.803.000 más de EBITDA por trimestre.</li>
+<li>Impuesto = 34% de (EBITDA − gastos financieros): tasa IRPJ/CSLL observada en todos los cierres; supone depreciación = 0. Margen EBITDA = EBITDA ÷ ingresos brutos.</li></ul></div>
+</div></div>
+
+<p class="note">Los ingresos brutos según el Estado de Resultados ascienden a USD 48,5M (presupuesto 48,6M). La hoja de ingresos por producto registra USD 47,4M (presupuesto 48,0M). Las diferencias, USD 1,1M en real y USD 0,6M en presupuesto, no están conciliadas y su origen está en revisión. La PDD de USD 1,11M se presenta separadamente como provisión por incumplimiento de pago B2B.</p>
+</main>
+<div class="tt" id="tt"></div>
+<script>
+const NS="http://www.w3.org/2000/svg",Q=["T1","T2","T3","T4"];
+function f(n,d=0){const neg=n<0;let s=Math.abs(n).toFixed(d);let[a,b]=s.split(".");a=a.replace(/\B(?=(\d{3})+(?!\d))/g,".");return(neg?"-":"")+a+(b?","+b:"")}
+function el(p,t,a,x){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(x!==undefined)e.textContent=x;p.appendChild(e);return e}
+const tt=document.getElementById("tt");
+function tip(e,txt){e.addEventListener("mousemove",ev=>{tt.style.display="block";tt.textContent=txt;tt.style.left=ev.clientX+12+"px";tt.style.top=ev.clientY+12+"px"});e.addEventListener("mouseleave",()=>tt.style.display="none")}
+const C={bud:"var(--bud)",real:"var(--real)"};
+function bars(id,cats,series,max,fmt){const s=document.getElementById(id);s.innerHTML="";const W=640,H=280,l=50,b=30,t=16,w=W-l-12,h=H-b-t;
+for(let i=0;i<=4;i++){const y=t+h-h*i/4;el(s,"line",{x1:l,x2:W-12,y1:y,y2:y,stroke:"var(--line)"});el(s,"text",{x:l-6,y:y+4,"text-anchor":"end"},f(max*i/4))}
+const g=w/cats.length;cats.forEach((c,i)=>{const bw=g*.3;series.forEach((se,j)=>{const v=se.d[i],bh=h*v/max,x=l+g*i+g/2-bw+j*bw,y=t+h-bh;
+const r=el(s,"rect",{x,y,width:bw-3,height:bh,rx:3,fill:se.c});tip(r,`${c} · ${se.n}: ${fmt(v)}`);
+el(s,"text",{x:x+(bw-3)/2,y:y-4,"text-anchor":"middle",class:"v"},fmt(v))});
+el(s,"text",{x:l+g*i+g/2,y:H-10,"text-anchor":"middle"},c)})}
+bars("c1",Q,[{n:"Presupuesto",d:[10700,11400,12700,13800],c:C.bud},{n:"Real",d:[10850,11750,12500,13400],c:C.real}],16000,v=>f(v));
+bars("c2",Q,[{n:"Presupuesto",d:[2111,2247,2601,2889],c:C.bud},{n:"Real",d:[1780.5,1832.5,1155,1002],c:C.real}],3200,v=>f(v,v%1?1:0));
+bars("c10",Q,[{n:"Presupuesto",d:[1274.46,1357.62,1578.06,1754.94],c:C.bud},{n:"Real",d:[1036.53,1051.05,570.9,450.12],c:C.real}],2000,v=>f(v));
+(function(){const s=document.getElementById("c3"),W=640,H=280,l=50,b=30,t=16,w=W-l-20,h=H-b-t,max=24;
+for(let i=0;i<=4;i++){const y=t+h-h*i/4;el(s,"line",{x1:l,x2:W-12,y1:y,y2:y,stroke:"var(--line)"});el(s,"text",{x:l-6,y:y+4,"text-anchor":"end"},f(max*i/4)+"%")}
+const X=i=>l+w*(i+.5)/4,Y=v=>t+h-h*v/max;
+[["Presupuesto",[19.7,19.7,20.5,20.9],C.bud,-10],["Real",[16.4,15.6,9.2,7.5],C.real,18]].forEach(([n,d,c,off])=>{
+el(s,"polyline",{points:d.map((v,i)=>X(i)+","+Y(v)).join(" "),fill:"none",stroke:c,"stroke-width":3,"stroke-linejoin":"round"});
+d.forEach((v,i)=>{const p=el(s,"circle",{cx:X(i),cy:Y(v),r:5,fill:c});tip(p,`${Q[i]} · ${n}: ${f(v,1)}%`);el(s,"text",{x:X(i),y:Y(v)+off*(n=="Real"?1:1),"text-anchor":"middle",class:"v"},f(v,1)+"%")})});
+Q.forEach((q,i)=>el(s,"text",{x:X(i),y:H-10,"text-anchor":"middle"},q))})();
+(function(){const s=document.getElementById("c4"),d=[["Fletes y logística CD",1360,"33,3%"],["Cancelaciones por retraso logístico",675,"16,6%"],["Provisión por incumplimiento de pago B2B / inadimplência (PDD)",670,"16,4%"],["Reentregas y divergencias de pedido",515,"12,6%"],["Sistemas legados y administración",260,"6,4%"]];
+const l=235,mx=1500,w=640-l-90;d.forEach((r,i)=>{const y=10+i*48,bw=w*r[1]/mx;const tx=(i+1)+". "+r[0],k=tx.length>44?tx.lastIndexOf(" ",33):-1;
+if(k>0){[tx.slice(0,k),tx.slice(k+1)].forEach((p,n)=>el(s,"text",{x:l-8,y:y+14+n*14,"text-anchor":"end"},p).setAttribute("style","font-size:11.5px"))}else el(s,"text",{x:l-8,y:y+22,"text-anchor":"end"},tx).setAttribute("style","font-size:11.5px");
+const e=el(s,"rect",{x:l,y,width:bw,height:30,rx:4,fill:"var(--bad)",opacity:1-i*.14});tip(e,`${r[0]}: ${f(r[1])} (${r[2]})`);
+el(s,"text",{x:l+bw+6,y:y+20,class:"v"},f(r[1])+" · "+r[2])})})();
+(function(){const s=document.getElementById("c5"),d=[["Fletes y logística",1360,"33,3%"],["Cancelaciones",675,"16,6%"],["PDD B2B",670,"16,4%"],["Reentregas",515,"12,6%"],["Sistemas y admin.",260,"6,4%"],["Resto",598,"14,7%"]],
+col=["#c4452d","#d9693f","#e58f4d","#d7ac5c","#9aa56a","#a9b4be"],W=640,tot=4078;let x=0;const lg=document.getElementById("l5");
+d.forEach((r,i)=>{const w=W*r[1]/tot,e=el(s,"rect",{x,y:20,width:w-2,height:56,rx:4,fill:col[i]});tip(e,`${r[0]}: ${f(r[1])} (${r[2]})`);
+if(w>50)el(s,"text",{x:x+w/2-1,y:54,"text-anchor":"middle",style:"fill:#fff;font-weight:700"},r[2]);x+=w;
+lg.insertAdjacentHTML("beforeend",`<span><i style="background:${col[i]}"></i>${r[0]} ${f(r[1])}</span>`)});
+el(s,"text",{x:0,y:104},"Brecha total: 4.078 · 5 causas = 3.480 (85,3%)")})();
+const rec=document.getElementById("rec"),mes=document.getElementById("mes"),REV=13400,IN=1002,GF=320,TX=0.34,CAUSAS=[["Pedidos cancelados por lentitud en homologación de crédito",1250,"Cancelaciones y descartes"],["Fletes duplicados y entregas de emergencia",960,"Fletes y logística CD"],["Cancelaciones e intereses por divergencias de facturación",390,"Reentregas y multas"],["Horas extras y auditorías por cierre contable tardío",180,"Administración y sistemas"]];
+function sim(){const r=+rec.value,m=+mes.value,mej=2780*(r/100)/4*(3-m)/3,ia=IN+mej,pp=mej/REV*100;
+recV.textContent=r+"%";mesV.textContent=m;
+rIn.textContent=f(IN);rIA.textContent=f(ia,1);rMej.textContent="+"+f(mej,1);rPP.textContent="+"+f(pp,1)+" p.p.";
+kMej.textContent="USD "+f(mej,1)+" mil";
+rLN0.textContent=f((IN-GF)*(1-TX),1);rLN1.textContent=f((ia-GF)*(1-TX),1);
+tCause.innerHTML=CAUSAS.map(c=>`<tr><td>${c[0]}</td><td>${f(c[1])}</td><td>${f(c[1]*(r/100)/4*(3-m)/3,1)}</td><td class="l">${c[2]}</td></tr>`).join("")+`<tr class="hl"><td>Total</td><td>${f(2780)}</td><td>${f(mej,1)}</td><td class="l"></td></tr>`;
+const s=document.getElementById("c6");s.innerHTML="";const W=640,H=260,l=50,b=30,t=22,h=H-b-t,max=2000;
+for(let i=0;i<=4;i++){const y=t+h-h*i/4;el(s,"line",{x1:l,x2:W-12,y1:y,y2:y,stroke:"var(--line)"});el(s,"text",{x:l-6,y:y+4,"text-anchor":"end"},f(max*i/4))}
+[["Inercial",IN,C.bud,170,f(IN)+" ("+f(7.5,1)+"%)"],["Con intervenciones",ia,"var(--ia)",370,f(ia,1)+" ("+f(ia/REV*100,1)+"%)"]].forEach(([n,v,c,x,lab])=>{const bh=h*v/max,e=el(s,"rect",{x,y:t+h-bh,width:100,height:bh,rx:4,fill:c});tip(e,n+": "+lab);
+el(s,"text",{x:x+50,y:t+h-bh-6,"text-anchor":"middle",class:"v"},lab);el(s,"text",{x:x+50,y:H-10,"text-anchor":"middle"},n)})}
+rec.oninput=mes.oninput=sim;sim();
+(function(){
+const xs=[1,2,3,4],RV=[10850,11750,12500,13400],TXq=[1844.5,1997.5,2125,2278],CAN=[195,240,380,420],MPq=[3650,3920,4380,4750],MOq=[870,920,1020,1080],COM=[690,735,790,850],FLE=[680,790,1050,1220],REE=[110,145,210,260],ADM=[430,460,540,590],PDD=[160,220,340,390],MKT=[440,490,510,560],GFq=[210,240,290,320];
+function pr(y){const my=y.reduce((a,b)=>a+b)/4,b=xs.reduce((a,x,i)=>a+(x-2.5)*(y[i]-my),0)/5;return my+b*2.5}
+const rt=a=>a.map((v,i)=>v/RV[i]);
+const T4=1002,MEJ=2780000*0.4/4/1000,TAX=0.34;
+const MEJL={can:1250*0.4/4,fle:960*0.4/4,ree:390*0.4/4,adm:180*0.4/4};
+const r4={tax:TXq[3]/RV[3],can:CAN[3]/RV[3],mp:MPq[3]/RV[3],mo:MOq[3]/RV[3],com:COM[3]/RV[3],fle:FLE[3]/RV[3],ree:REE[3]/RV[3],pdd:PDD[3]/RV[3]};
+const x4={adm:ADM[3],mkt:MKT[3],gf:GFq[3]};
+const rD=Object.assign({},r4,{can:pr(rt(CAN)),mp:pr(rt(MPq)),fle:pr(rt(FLE)),ree:pr(rt(REE)),pdd:pr(rt(PDD))});
+const xD=Object.assign({},x4,{adm:pr(ADM),gf:pr(GFq)});
+function PL(Rn,r,x,mj){const L={R:Rn};L.tax=r.tax*Rn;L.can=r.can*Rn-(mj?mj.can:0);L.net=Rn-L.tax-L.can;L.mp=r.mp*Rn;L.mo=r.mo*Rn;L.cmv=L.mp+L.mo;L.gp=L.net-L.cmv;L.com=r.com*Rn;L.fle=r.fle*Rn-(mj?mj.fle:0);L.ree=r.ree*Rn-(mj?mj.ree:0);L.adm=x.adm-(mj?mj.adm:0);L.pdd=r.pdd*Rn;L.mkt=x.mkt;L.opex=L.com+L.fle+L.ree+L.adm+L.pdd+L.mkt;L.e=L.gp-L.opex;L.gf=x.gf;L.ebt=L.e-L.gf;L.irpj=L.ebt*TAX;L.nl=L.ebt-L.irpj;return L}
+const S=[{n:"Deterioro",k:"s1",sub:"Tendencia lineal de costos T1–T4 2026",L:PL(13400,rD,xD)},
+{n:"Inercial",k:"s2",sub:"Continuidad del T4 2026",L:PL(13400,r4,x4)},
+{n:"Con intervenciones",k:"s3",sub:"Inercial + meta de recuperación",L:PL(13400,r4,x4,MEJL)}];
+S.forEach(x=>{x.r=x.L.R;x.e=x.L.e;x.gp=x.L.gp;x.gf=x.L.gf;x.m=x.e/x.r*100;x.d=x.e-T4;x.ebt=x.L.ebt;x.tax=x.L.irpj;x.nl=x.L.nl});
+const col=["var(--bad)","var(--bud)","var(--ia)"];
+const d2=v=>f(v,2);
+document.getElementById("sc").innerHTML=S.map((x,i)=>`<div class="card ${x.k}"><h2>${x.n}</h2><p>${x.sub}</p><dl><dt>Ingresos brutos</dt><dd>USD ${f(x.r*1000)}</dd><dt>Lucro bruto (margen)</dt><dd>USD ${f(x.gp*1000)} (${d2(x.gp/x.r*100)} %)</dd>${i==2?`<dt>EBITDA inercial</dt><dd>USD ${f(T4*1000)}</dd><dt>Meta de mejora (40% de la base de fricciones)</dt><dd>USD ${f(MEJ*1000)}</dd><dt>EBITDA con intervenciones</dt>`:`<dt>EBITDA</dt>`}<dd>USD ${f(x.e*1000)}</dd><dt>Margen EBITDA</dt><dd>${d2(x.m)} %</dd><dt>Gastos financieros</dt><dd>USD ${f(x.gf*1000)}</dd><dt>Impuesto (34%)</dt><dd>USD ${f(x.tax*1000)}</dd><dt>Lucro líquido (margen)</dt><dd>USD ${f(x.nl*1000)} (${d2(x.nl/x.r*100)} %)</dd></dl></div>`).join("");
+let s=document.getElementById("c7");const W=640,l=50,b=30,t=22,H=260,h=H-b-t,max=1500;
+for(let i=0;i<=4;i++){const y=t+h-h*i/4;el(s,"line",{x1:l,x2:W-12,y1:y,y2:y,stroke:"var(--line)"});el(s,"text",{x:l-6,y:y+4,"text-anchor":"end"},f(max*i/4))}
+S.forEach((x,i)=>{const bw=100,xx=90+i*180,bh=h*x.e/max,r=el(s,"rect",{x:xx,y:t+h-bh,width:bw,height:bh,rx:4,fill:col[i]});
+const lab=f(x.e,x.e%1?2:0);tip(r,`${x.n}: USD ${f(x.e*1000)}`);el(s,"text",{x:xx+bw/2,y:t+h-bh-6,"text-anchor":"middle",class:"v"},lab);el(s,"text",{x:xx+bw/2,y:H-10,"text-anchor":"middle"},x.n)});
+s=document.getElementById("c8");const l2=150,w2=640-l2-80;
+S.forEach((x,i)=>{const y=10+i*50,bw=w2*x.m/12;el(s,"text",{x:l2-8,y:y+20,"text-anchor":"end"},x.n);
+const r=el(s,"rect",{x:l2,y,width:bw,height:30,rx:4,fill:col[i]});tip(r,`${x.n}: ${d2(x.m)} %`);el(s,"text",{x:l2+bw+6,y:y+20,class:"v"},d2(x.m)+" %")});
+s=document.getElementById("c9");const z=360,sc=230/400;
+el(s,"line",{x1:z,x2:z,y1:4,y2:190,stroke:"var(--mut)"});
+S.forEach((x,i)=>{const y=14+i*56,w=Math.abs(x.d)*sc,xx=x.d<0?z-w:z;el(s,"text",{x:x.d<0?z+8:z-8,y:y+22,"text-anchor":x.d<0?"start":"end"},x.n);
+if(w>0){const r=el(s,"rect",{x:xx,y,width:w,height:32,rx:4,fill:col[i]});tip(r,`${x.n}: ${x.d>0?"+":""}${d2(x.d)} vs T4 2026`)}
+const lb=(x.d>0?"+":"")+d2(x.d);el(s,"text",{x:x.d<0?xx-6:z+w+6,y:y+22,"text-anchor":x.d<0?"end":"start",class:"v"},lb)});
+const s11=document.getElementById("c11"),mx=800;
+for(let i=0;i<=4;i++){const y=t+h-h*i/4;el(s11,"line",{x1:l,x2:W-12,y1:y,y2:y,stroke:"var(--line)"});el(s11,"text",{x:l-6,y:y+4,"text-anchor":"end"},f(mx*i/4))}
+S.forEach((x,i)=>{const bw=100,xx=90+i*180,bh=h*x.nl/mx,r=el(s11,"rect",{x:xx,y:t+h-bh,width:bw,height:bh,rx:4,fill:col[i]});tip(r,`${x.n}: USD ${f(x.nl*1000)}`);el(s11,"text",{x:xx+bw/2,y:t+h-bh-6,"text-anchor":"middle",class:"v"},f(x.nl,x.nl%1?2:0));el(s11,"text",{x:xx+bw/2,y:H-10,"text-anchor":"middle"},x.n)});
+const rows=[["Ingresos brutos","R",1],["(−) Impuestos sobre ventas","tax"],["(−) Cancelaciones y descartes","can"],["Ingresos operativos netos","net",1],["(−) Materia prima","mp"],["(−) Mano de obra","mo"],["Lucro bruto","gp",1],["(−) Gastos comerciales","com"],["(−) Fletes y logística","fle"],["(−) Reentregas y multas","ree"],["(−) Administración y sistemas","adm"],["(−) PDD","pdd"],["(−) Marketing","mkt"],["EBITDA","e",1],["(−) Gastos financieros","gf"],["Lucro antes de impuestos","ebt",1],["(−) IRPJ y CSLL (34%)","irpj"],["Lucro líquido","nl",1]];
+document.getElementById("tPL").innerHTML=`<tr><th>USD</th>${S.map(x=>`<th>${x.n}</th>`).join("")}</tr>`+rows.map(r=>`<tr${r[2]?' class="hl"':""}><td>${r[0]}</td>${S.map(x=>`<td>${f(Math.round(x.L[r[1]]*1000))}</td>`).join("")}</tr>`).join("")+`<tr><td>Margen EBITDA</td>${S.map(x=>`<td>${d2(x.m)} %</td>`).join("")}</tr><tr><td>Margen lucro líquido</td>${S.map(x=>`<td>${d2(x.nl/x.r*100)} %</td>`).join("")}</tr>`;
+const cm=(S[1].e+x4.adm+x4.mkt)/13400,RS=[["Ingresos -5%",12730],["Ingresos base",13400],["Ingresos +5%",14070],["Tendencia lineal",pr(RV)]],RC=[0,0.2,0.4,0.6];
+document.getElementById("tSens").innerHTML=`<tr><th>Ingresos T1 2027</th>${RC.map(c=>`<th>Recupera ${c*100}%${c==0.4?" (meta)":""}</th>`).join("")}</tr>`+RS.map(r=>`<tr><td>${r[0]}: ${f(Math.round(r[1]*1000))}</td>${RC.map(c=>{const e=S[1].e+(r[1]-13400)*cm+2780*c/4;const hi=r[1]==13400&&c==0.4;return `<td${hi?' style="font-weight:700;color:var(--ia)"':""}>${f(Math.round(e*1000))}</td>`}).join("")}</tr>`).join("");
+})();
+
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x==b));document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id==b.dataset.t))});
+</script>
+</body>
+</html>
